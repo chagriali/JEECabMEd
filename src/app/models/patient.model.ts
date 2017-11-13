@@ -24,5 +24,9 @@ export class PatientModel{
     this.telephone = telephone;
   }
 
+  static createPatient(object:any){
+    return new PatientModel(object.nom,object.cin,object.prenom,object.telephone,object.email,new Date(object.date_naissance) ,new Ref_sexModel(object.ref_sex.id_sexe,object.ref_sex.libelle),object.id_personne);
+  }
+
 
 }

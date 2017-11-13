@@ -5,6 +5,7 @@ import { DashboardSecretaryComponent } from './dashboard-secretary.component';
 import {MedicalFileInputComponent} from "./medical-file-input/medical-file-input.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SexService} from "../../services/sex.service";
+import {PatientsListComponent} from "./patients-list/patients-list.component";
 
 const routes: Routes = [
   {
@@ -19,7 +20,14 @@ const routes: Routes = [
         path: 'add-new-medical-file',
         component: MedicalFileInputComponent ,
         data: {
-            title: 'Add new Medical File'
+            title: 'Ajouter nouveau patient'
+        }
+      },
+      {
+        path: 'patient-list',
+        component: PatientsListComponent ,
+        data: {
+          title: 'Liste des patients'
         }
       },
     ]

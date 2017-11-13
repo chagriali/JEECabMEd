@@ -18,7 +18,14 @@ export const navigation = [
       {
         name: 'Ajouter Patient',
         url: '/secretary/add-new-medical-file',
-        icon: 'icon-plus',
-      }]
+        icon: 'fa fa-plus',
+      },
+      {
+        name: 'List Patient',
+        url: '/secretary/patient-list',
+        icon: 'fa fa-bars',
+      },
+
+    ]
   }
 ];
