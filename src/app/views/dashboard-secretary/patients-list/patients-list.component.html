@@ -22,7 +22,10 @@
             <td>{{ d.patient.date_naissance | date:'yyyy-MM-dd' }} </td>
             <td>{{ d.patient.email  }}</td>
             <td>{{ d.patient.telephone }}</td>
-            <td><a href="#"><i class="fa fa-pencil-square-o"></i></a></td>
+            <td>
+              <button class="btn btn-sm btn-primary"><i class="fa fa-search-plus"></i> Détails</button>
+              <!--<a [routerLink]="['/patient-detail/'+d.patient.idPersonne]" href="" ><i class="fa fa-pencil-square-o"></i></a>-->
+            </td>
           </tr>
           </tbody>
         </table>

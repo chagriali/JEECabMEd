@@ -8,8 +8,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {SexService} from "../../services/sex.service";
 import {PatientService} from "../../services/patient.service";
-import {PatientsListComponent} from "./patients-list/patients-list.component";
 import {DossierService} from "../../services/dossier.service";
+import {DetailPatientComponent} from "./detail-patient/detail-patient.component";
+import {PatientsListComponent} from "./patients-list/patients-list.component";
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import {DossierService} from "../../services/dossier.service";
     DashboardRoutingModule,
     ChartsModule
   ],
-  declarations: [ DashboardSecretaryComponent,MedicalFileInputComponent,PatientsListComponent
+  declarations: [ DashboardSecretaryComponent,MedicalFileInputComponent,DetailPatientComponent,PatientsListComponent
   ],
   providers:[SexService,PatientService,DossierService]
 })

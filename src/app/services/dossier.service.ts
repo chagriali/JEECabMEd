@@ -8,8 +8,10 @@ export class DossierService{
   dossiers:DossierModel[];
   constructor(private http:Http) {}
   getDossiers(){
-    return this.http.get('http://localhost:9999/dossiermedical').map(res => res.json());
+    return this.http.get('http://localhost:8080/dossiermedical').map(res => res.json());
 
   }
-
+  getDossierPatient(id:number){
+    return this.http.get('http://localhost:8080/dossiermedical/'+id).map(res => res.json());
+  }
 }

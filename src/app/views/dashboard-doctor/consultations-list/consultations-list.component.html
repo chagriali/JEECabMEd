@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Liste des Consultations
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>N° Consultation</th>
+            <th>Date Consultation</th>
+            <th>Durée</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr *ngFor="let c of consultations">
+            <td>{{ c.id_consultation}}</td>
+            <td>{{ c.date_consultation | date:'yyyy-MM-dd' }} </td>
+            <td>{{ c.duree  }}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" ><i class="fa fa-search-plus"></i> Détails</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

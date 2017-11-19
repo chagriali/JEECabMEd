@@ -1,4 +1,4 @@
-export class SymptomesModel{
+export class SymptomeModel{
   id_symptome:Number
   libele:String;
   description:String;
@@ -8,4 +8,8 @@ export class SymptomesModel{
     this.libele = libelle;
     this.description=description;
   }
+  static createSymptome(object:any){
+    return new SymptomeModel(object.id_symptome,object.libele,object.description);
+  }
+
 }

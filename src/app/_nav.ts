@@ -8,6 +8,13 @@ export const navigation = [
     name: 'Espace Docteur',
     url: '/doctor',
     icon: '',
+    children: [
+      {
+        name: 'List Patient',
+        url: '/doctor/patient-list',
+        icon: 'fa fa-bars',
+      }
+      ]
   },
 
   {

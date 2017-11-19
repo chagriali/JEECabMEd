@@ -6,6 +6,7 @@ import {MedicalFileInputComponent} from "./medical-file-input/medical-file-input
 import {ReactiveFormsModule} from "@angular/forms";
 import {SexService} from "../../services/sex.service";
 import {PatientsListComponent} from "./patients-list/patients-list.component";
+import {DetailPatientComponent} from "./detail-patient/detail-patient.component";
 
 const routes: Routes = [
   {
@@ -30,12 +31,20 @@ const routes: Routes = [
           title: 'Liste des patients'
         }
       },
+      {
+
+        path: 'patient-detail/:id',
+        component: DetailPatientComponent ,
+        data: {
+          title: 'Détail du patient'
+        }
+      },
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes )],
   exports: [RouterModule],
   providers:[]
 })

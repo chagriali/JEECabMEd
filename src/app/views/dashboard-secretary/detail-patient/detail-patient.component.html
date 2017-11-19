@@ -1,0 +1,59 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet box green">
+      <div class="portlet-title">
+        <div class="card-header">
+          <i class="fa fa-user-circle"></i> Patient : {{dossier.patient.prenom}} {{dossier.patient.nom}}
+        </div>
+
+      <div class="portlet-body">
+        <div class="tab-content">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-striped table-bordered table-hover no-footer">
+                <tbody>
+                <tr>
+                  <th>Nom et Prénom</th>
+                  <td>{{dossier.patient.prenom}} {{dossier.patient.nom}}</td>
+                </tr>
+                <tr>
+                  <th>Date Création</th>
+                  <td>{{dossier.date_creation | date:'yyyy-MM-dd'}}</td>
+                </tr>
+                <tr>
+                  <th>CIN</th>
+                  <td>{{dossier.patient.cin}}</td>
+                </tr>
+                <tr>
+                  <th>Date de Naissance</th>
+                  <td>{{dossier.patient.date_naissance | date:'yyyy-MM-dd'}}</td>
+                </tr>
+                <tr>
+                  <th>Télephone</th>
+                  <td>{{dossier.patient.telephone}}</td>
+                </tr>
+                <tr>
+                  <th>Email</th>
+                  <td>{{dossier.patient.email}}</td>
+                </tr>
+                <tr>
+                <tr>
+                  <th>Gender</th>
+                  <td>{{dossier.patient.ref_sex.libelle}}</td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="card-footer">
+          <button class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</button>
+          <button class="btn btn-sm btn-danger" ><i class="fa fa-remove"></i> Delete</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
