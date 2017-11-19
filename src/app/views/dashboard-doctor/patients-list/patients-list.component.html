@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Liste des dossiers
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Nom / Prénom</th>
+            <th>Date de naissance</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th style="text-align: center">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr *ngFor="let d of dossiers">
+            <td>{{ d.patient.nom }} {{ d.patient.prenom}}</td>
+            <td>{{ d.patient.date_naissance | date:'yyyy-MM-dd' }} </td>
+            <td>{{ d.patient.email  }}</td>
+            <td>{{ d.patient.telephone }}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" (click)="redirect()"><i class="fa fa-search-plus"></i> Détails</button>
+              <button class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</button>
+              <button class="btn btn-sm btn-danger" ><i class="fa fa-remove"></i> Delete</button>
+                <!--<a [routerLink]="['/patient-detail/'+d.patient.idPersonne]" href="" ><i class="fa fa-plus" style="color: blue"></i></a>-->
+                <!--<a [routerLink]="['/patient-detail/'+d.patient.idPersonne]" href="" ><i class="fa fa-pencil" style="color: green"></i></a>
+                <a [routerLink]="['/patient-detail/'+d.patient.idPersonne]" href="" ><i class="fa fa-plus" style="color:red"></i></a>-->
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
