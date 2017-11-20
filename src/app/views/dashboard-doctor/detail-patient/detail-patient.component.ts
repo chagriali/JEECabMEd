@@ -2,6 +2,9 @@ import {Component, OnInit} from "@angular/core";
 import {DossierService} from "../../../services/dossier.service";
 import {DossierModel} from "../../../models/dossier.model";
 import {PatientModel} from "../../../models/patient.model";
+import {ActivatedRoute} from "@angular/router";
+import {ConsultationModel} from "../../../models/consultation.model";
+import {ConsultationsService} from "../../../services/consultations.service";
 
 @Component({
   selector : 'doctor-patient-detail',
@@ -9,12 +12,18 @@ import {PatientModel} from "../../../models/patient.model";
 })
 export class DoctorDetailPatientComponent implements OnInit{
 
-  constructor(private dossierService:DossierService){}
+  constructor(private dossierService:DossierService,private consultationService:ConsultationsService, private activatedRoute:ActivatedRoute){}
   dossier : DossierModel;
   ngOnInit(): void {
-    this.dossierService.getDossierPatient(1).subscribe(
+    this.dossierService.getDossierPatient(this.activatedRoute.snapshot.params['id']).subscribe(
       (result)=>{
-          this.dossier = (new DossierModel(result.id_dossier_medical,new Date(result.date_creation),PatientModel.createPatient(result.patient)));
+        console.log(result)
+          this.dossier = (new DossierModel(result.idDossierMedical,new Date(result.dateCreation),PatientModel.createPatient(result.patient)));
+          let consultations: ConsultationModel[]=[];
+          for(let c of result.consultations){
+            consultations.push(ConsultationModel.createConsultation(c));
+          }
+          this.dossier.consultations=consultations;
 
         console.log(this.dossier);
       }
@@ -23,5 +32,17 @@ export class DoctorDetailPatientComponent implements OnInit{
         console.log(error);
       }
     );
+  }
+
+
+  onNewConsultation(){
+    this.consultationService.addConsultation(this.activatedRoute.snapshot.params['id'],{}).subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      },
+    )
   }
 }

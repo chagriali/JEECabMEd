@@ -11,12 +11,17 @@ import {CommonModule} from "@angular/common";
 import {DoctorDetailPatientComponent} from "./detail-patient/detail-patient.component";
 import {ConsultationsListComponent} from "./consultations-list/consultations-list.component";
 import {ConsultationsService} from "../../services/consultations.service";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {TabsModule} from "ngx-bootstrap";
+
 @NgModule({
   imports: [
     DashboardRoutingModule,
     ChartsModule,
     CommonModule,
     DashboardRoutingModule,
+    NgbModule,
+    TabsModule
   ],
   declarations: [ DashboardDoctorComponent ,DoctorPatientsListComponent , DoctorDetailPatientComponent , ConsultationsListComponent],
   providers:[SexService,PatientService,DossierService,ConsultationsService]

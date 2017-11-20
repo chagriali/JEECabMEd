@@ -10,21 +10,21 @@ export class DoctorModel{
   email:String;
   date_naissance:Date;
   telephone:String
-  ref_sex:Ref_sexModel;
+  //refSex:Ref_sexModel;
 
 
-  constructor(nom: String, cin?: String, prenom?: String,telephone?:String, email?: String, date_naissance?: Date,refSex?:Ref_sexModel,idPersonne?: Number) {
+  constructor(nom: String, cin?: String, prenom?: String,telephone?:String, email?: String, date_naissance?: Date,idPersonne?: Number) {
     this.idPersonne = idPersonne;
     this.nom = nom;
     this.cin = cin;
     this.prenom = prenom;
     this.email = email;
     this.date_naissance = date_naissance;
-    this.ref_sex = refSex;
+
     this.telephone = telephone;
   }
   static createDoctor(object:any){
-    return new DoctorModel(object.nom,object.cin,object.prenom,object.telephone,object.email,new Date(object.date_naissance) ,new Ref_sexModel(object.ref_sex.id_sexe,object.ref_sex.libelle),object.idPersonne);
+    return new DoctorModel(object.nom,object.cin,object.prenom,object.telephone,object.email,new Date(object.dateNaissance) ,object.idPersonne);
   }
 
 }

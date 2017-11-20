@@ -3,15 +3,14 @@ import {DossierService} from "../../../services/dossier.service";
 import {DossierModel} from "../../../models/dossier.model";
 import {PatientModel} from "../../../models/patient.model";
 import {ConsultationModel} from "../../../models/consultation.model";
-import { Router }                 from '@angular/router';
+import { Router} from '@angular/router';
 @Component({
   selector : 'doctor-patient-list',
   templateUrl : 'patients-list.component.html'
 })
 export class DoctorPatientsListComponent implements OnInit{
   dossiers:DossierModel[] = [];
-  router: Router;
-  constructor(private dossierService:DossierService){}
+  constructor(private dossierService:DossierService, private router:Router){}
   ngOnInit(): void {
     this.dossierService.getDossiers().subscribe(
       (result)=>{
@@ -20,7 +19,7 @@ export class DoctorPatientsListComponent implements OnInit{
 
         for (let dossier of result){
           console.log(dossier);
-          d = new DossierModel(dossier.id_dossier_medical,new Date(dossier.date_creation),PatientModel.createPatient(dossier.patient));
+          d = new DossierModel(dossier.idDossierMedical,new Date(dossier.dateCreation),PatientModel.createPatient(dossier.patient));
           let consultations: ConsultationModel[]=[];
           for(let c of dossier.consultations){
             consultations.push(ConsultationModel.createConsultation(c));
@@ -38,8 +37,8 @@ export class DoctorPatientsListComponent implements OnInit{
     );
 
   }
-  /*redirect(){
-    this.router.navigateByUrl('/dashboard');
-  }*/
+  onDetailClick(id:Number){
+    this.router.navigate(['/doctor/patient-detail',id]);
+  }
 
 }

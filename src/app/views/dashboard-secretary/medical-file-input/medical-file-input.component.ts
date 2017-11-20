@@ -22,7 +22,7 @@ export class MedicalFileInputComponent implements OnInit{
       (result) => {
         console.log(result);
         for (let s of result){
-          this.sexForm.push(new Ref_sexModel(s.id_sexe,s.libelle));
+          this.sexForm.push(new Ref_sexModel(s.idSexe,s.libelle));
         }
       },
       error => console.log(error) );
@@ -41,7 +41,7 @@ export class MedicalFileInputComponent implements OnInit{
   };
 
   onSubmit(){
-    let refSex = this.sexForm.find(o => o.id_sexe === this.medicalFileForm.value.sex);
+    let refSex = this.sexForm.find(o => o.idSexe === this.medicalFileForm.value.sex);
 
     let patient = new PatientModel(
       this.medicalFileForm.value.nom,
@@ -55,7 +55,7 @@ export class MedicalFileInputComponent implements OnInit{
     console.log(patient);
     this.patientService.addPatient(patient).subscribe((result)=>{
       console.log(result);
-    })
+    },error => console.log(error) );
   }
 
   onReset(){

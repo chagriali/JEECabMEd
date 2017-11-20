@@ -23,7 +23,7 @@
             <td>{{ d.patient.email  }}</td>
             <td>{{ d.patient.telephone }}</td>
             <td>
-              <button class="btn btn-sm btn-primary" (click)="redirect()"><i class="fa fa-search-plus"></i> Détails</button>
+              <button class="btn btn-sm btn-primary" (click)="onDetailClick(d.id_dossier_medical)"><i class="fa fa-search-plus"></i> Détails</button>
               <button class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</button>
               <button class="btn btn-sm btn-danger" ><i class="fa fa-remove"></i> Delete</button>
                 <!--<a [routerLink]="['/patient-detail/'+d.patient.idPersonne]" href="" ><i class="fa fa-plus" style="color: blue"></i></a>-->

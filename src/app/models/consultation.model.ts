@@ -26,10 +26,10 @@ export class ConsultationModel{
 
   static createConsultation(object:any){
     return new ConsultationModel(
-      object.id_consultation,
-      object.date_consultation,
+       object.idConsultation,
+      new Date(object.dateConsultation),
       object.duree,
-      new DoctorModel(object.docteur),
+      DoctorModel.createDoctor(object.docteur),
       object.poids,
       object.temperature,
        null,
