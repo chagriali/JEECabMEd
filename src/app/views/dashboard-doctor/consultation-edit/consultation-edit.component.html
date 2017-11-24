@@ -1,0 +1,140 @@
+<form [formGroup]="consultationForm" (ngSubmit)="onValidate()">
+<tabset>
+
+  <!-- Etat -->
+  <tab>
+    <ng-template tabHeading>
+      Etat
+    </ng-template>
+      <div class="card">
+        <div class="card-header">
+          <strong>Etat actuel du patient</strong>
+        </div>
+        <div class="card-body">
+          <div class="form-group has-success">
+            <label class="form-form-control-label" >Poid</label>
+            <input class="form-control"
+                   type="text"
+                   formControlName="poid" >
+          </div>
+          <div class="form-group has-warning">
+            <label class="form-form-control-label">Temperature</label>
+            <input class="form-control"
+                   type="text"
+                   formControlName="temperature">
+          </div>
+        </div>
+
+      </div>
+
+  </tab>
+
+  <!-- Symptome -->
+  <tab>
+      <ng-template tabHeading>Symptomes</ng-template>
+      <div class="card">
+        <div class="card-header">
+          <h2>Liste symptomes</h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group" class="col-md-8">
+              <input class="form-control" type="text" (keyup)="onChange()" #symptomeInput name="symptomeFilter" #symptomeFilter placeholder="Type symptome here">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-outline-primary"  (click)="onAddSymptome(symptomeInput)"  type="button">Ajouter</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" style="margin-top: 5px" *ngIf="showDataSymptome">
+              <ul class="list-group">
+                <li *ngFor="let s of symptomesToShow" class="list-group-item">
+                  {{ s.libele }}
+                  <button class="btn btn-outline-primary pull-right" (click)="onSymptomeAdd(s.idSymptome)" type="button"><i class="fa fa-plus"></i></button>
+                </li>
+
+              </ul>
+            </div>
+            <hr>
+
+          </div>
+
+        </div>
+       </div>
+      <hr>
+      <div class="col-md-12" style="margin-top: 5px" >
+        <ul class="list-group">
+          <li *ngFor="let s of symptomesConsultation" class="list-group-item">
+            {{ s.libele }}
+            <button class="btn btn-outline-danger pull-right" (click)="onDelete(s.idSymptome)" type="button"><i class="fa fa-minus"></i></button>
+          </li>
+        </ul>
+      </div>
+    </tab>
+
+  <!-- Ordonance -->
+
+  <tab>
+    <ng-template tabHeading>
+      Ordonance
+    </ng-template>
+    <div class="card">
+      <div class="card-header">
+        <strong>Edition d'ordonance</strong>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <input type="text" class="form-control" #medicamentFilter name="medicamentFilter" (keyup)="onChangeMedicament()">
+          <button class="btn btn-primary" style="margin-top: 5px" type="button"  (click)="onAddPresc()">Ajouter préscription</button>
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="margin-top: 5px" *ngIf="showDataMedicament">
+            <ul class="list-group">
+              <li *ngFor="let s of medicamentsToShow" class="list-group-item">
+                {{ s.libele }}
+                <button class="btn btn-outline-primary pull-right" (click)="onAddMedicament(s.idMedicament,s.libele,s.description)" type="button"><i class="fa fa-plus"></i></button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="margin-top: 5px"  formArrayName="prescription" >
+            <ul class="list-group">
+              <li *ngFor="let p of consultationForm.get('prescription').controls; let i = index"  [formGroupName]="i" class="list-group-item">
+                <div class="form-group row">
+                  <div class="col-md-3" formGroupName="medicament">
+                    <input class="form-control" placeholder="Médicament" type="text" formControlName="libelle">
+                    <input type="text" hidden  formControlName="idMedicament">
+                    <input type="text" hidden  formControlName="description">
+                  </div>
+                  <div class="col-md-2">
+                    <input  class="form-control" placeholder="Quantité" type="text" formControlName="quantite" >
+                  </div>
+                  <div class="col-md-2">
+                    <input  class="form-control" placeholder="Période" type="text"  formControlName="periode">
+                  </div>
+                  <div class="col-md-2">
+                    <input  class="form-control" placeholder="Nombre par jour" type="text" formControlName="nbrFois">
+                  </div>
+                  <div class="col-md-2">
+                    <input  class="form-control" placeholder="Quand" type="text" formControlName="quand" >
+                  </div>
+                  <div class="col-md-1">
+                    <button class="btn btn-danger"  type="button" >X</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+
+        </div>
+      </div>
+  </tab>
+
+</tabset>
+</form>
+<button class="btn btn-success pull-right" style="margin-top: 5px" type="button" [disabled]="!consultationForm.valid" (click)="onValidate()">Valider</button>
+

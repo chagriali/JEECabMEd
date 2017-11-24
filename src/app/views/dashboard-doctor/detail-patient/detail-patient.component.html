@@ -78,22 +78,25 @@
 <h2>Consultation</h2>
 <div *ngIf="dossier != undefined">
 <div *ngFor="let c of dossier.consultations">
-<ngb-accordion   #acc="ngbAccordion" activeIds="ngb-panel-0">
-  <ngb-panel title="Date Consultation : {{c.date_consultation | date:'yyyy-MM-dd' }} - Docteur : {{ c.docteur.nom }} {{ c.docteur.prenom }}">
-    <ng-template ngbPanelContent>
-      <tabset>
-        <tab><ng-template tabHeading>Etat</ng-template>
-          <p>poid : {{ c.poids }}</p>
-          <p>temperature : {{ c.temperature }}</p>
-          <p>Duree : {{ c.duree }} </p>
-        </tab>
-        <tab>
-          <ng-template tabHeading>Symptomes</ng-template>
-          Tab 2 content
-        </tab>
-      </tabset>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
+  <div *ngIf="c.docteur!=null">
+    <ngb-accordion   #acc="ngbAccordion" activeIds="ngb-panel-0">
+      <ngb-panel title="Date Consultation : {{c.date_consultation | date:'yyyy-MM-dd' }} - Docteur : {{ c.docteur.nom }} {{ c.docteur.prenom }}">
+        <ng-template ngbPanelContent>
+          <tabset>
+            <tab><ng-template tabHeading>Etat</ng-template>
+              <p>poid : {{ c.poids }}</p>
+              <p>temperature : {{ c.temperature }}</p>
+              <p>Duree : {{ c.duree }} </p>
+            </tab>
+            <tab>
+              <ng-template tabHeading>Symptomes</ng-template>
+              Tab 2 content
+            </tab>
+          </tabset>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+
 </div>
 </div>

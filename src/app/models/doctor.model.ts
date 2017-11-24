@@ -20,10 +20,10 @@ export class DoctorModel{
     this.prenom = prenom;
     this.email = email;
     this.date_naissance = date_naissance;
-
     this.telephone = telephone;
   }
   static createDoctor(object:any){
+    if(object == null) return null;
     return new DoctorModel(object.nom,object.cin,object.prenom,object.telephone,object.email,new Date(object.dateNaissance) ,object.idPersonne);
   }
 

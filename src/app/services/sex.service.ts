@@ -7,6 +7,6 @@ export class SexService{
   constructor(private http:Http) {}
 
   getGender(){
-          return this.http.get('http://192.168.43.225:8080/gender').map(res => res.json());
+          return this.http.get('http://192.168.1.11:8080/gender').map(res => res.json());
   }
 }

@@ -10,14 +10,14 @@ export class ConsultationsService {
   }
 
   getConsultations(id: Number) {
-    return this.http.get('http://192.168.43.225:8080/consultation/' + id).map(res => res.json());
+    return this.http.get('http://192.168.1.11:8080/consultation/' + id).map(res => res.json());
 
   }
 
   addConsultation(idDossier: Number, consulation) {
 
     let header = new Headers({'Access-Control-Allow-Origin': '*',});
-    return this.http.post('http://192.168.43.225:8080/' + idDossier + '/consultation/', consulation, {headers: header}).map(res => res.json())
+    return this.http.post('http://192.168.1.11:8080/dossiermedical/' + idDossier + '/consultation/', consulation, {headers: header}).map(res => res.json())
   }
 
 }

@@ -12,7 +12,11 @@ import {DoctorDetailPatientComponent} from "./detail-patient/detail-patient.comp
 import {ConsultationsListComponent} from "./consultations-list/consultations-list.component";
 import {ConsultationsService} from "../../services/consultations.service";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {TabsModule} from "ngx-bootstrap";
+import {BsDropdownModule, TabsModule} from "ngx-bootstrap";
+import {ConsultationEditComponent} from "./consultation-edit/consultation-edit.component";
+import {SymptomeService} from "../../services/symptome.service";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MedicamentService} from "../../services/medicament.service";
 
 @NgModule({
   imports: [
@@ -20,10 +24,13 @@ import {TabsModule} from "ngx-bootstrap";
     ChartsModule,
     CommonModule,
     DashboardRoutingModule,
+    BsDropdownModule,
     NgbModule,
-    TabsModule
+    TabsModule,
+    ReactiveFormsModule
+
   ],
-  declarations: [ DashboardDoctorComponent ,DoctorPatientsListComponent , DoctorDetailPatientComponent , ConsultationsListComponent],
-  providers:[SexService,PatientService,DossierService,ConsultationsService]
+  declarations: [ DashboardDoctorComponent ,DoctorPatientsListComponent , DoctorDetailPatientComponent , ConsultationsListComponent,ConsultationEditComponent],
+  providers:[SexService,PatientService,DossierService,ConsultationsService,SymptomeService,MedicamentService]
 })
 export class DashboardDoctorModule { }

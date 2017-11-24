@@ -14,6 +14,7 @@ export class DoctorPatientsListComponent implements OnInit{
   ngOnInit(): void {
     this.dossierService.getDossiers().subscribe(
       (result)=>{
+        console.log(result);
         let dossiers:DossierModel[] = [];
         let d : DossierModel;
 

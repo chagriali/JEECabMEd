@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {DossierService} from "../../../services/dossier.service";
 import {DossierModel} from "../../../models/dossier.model";
 import {PatientModel} from "../../../models/patient.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ConsultationModel} from "../../../models/consultation.model";
 import {ConsultationsService} from "../../../services/consultations.service";
 
@@ -12,7 +12,10 @@ import {ConsultationsService} from "../../../services/consultations.service";
 })
 export class DoctorDetailPatientComponent implements OnInit{
 
-  constructor(private dossierService:DossierService,private consultationService:ConsultationsService, private activatedRoute:ActivatedRoute){}
+  constructor(private dossierService:DossierService,
+              private consultationService:ConsultationsService,
+              private activatedRoute:ActivatedRoute,
+              private router:Router){}
   dossier : DossierModel;
   ngOnInit(): void {
     this.dossierService.getDossierPatient(this.activatedRoute.snapshot.params['id']).subscribe(
@@ -38,7 +41,8 @@ export class DoctorDetailPatientComponent implements OnInit{
   onNewConsultation(){
     this.consultationService.addConsultation(this.activatedRoute.snapshot.params['id'],{}).subscribe(
       (result) => {
-        console.log(result);
+        console.log('result' + result);
+        this.router.navigate(['consultation',result],{relativeTo:this.activatedRoute});
       },
       (error) => {
         console.log(error);

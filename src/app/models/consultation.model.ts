@@ -29,8 +29,9 @@ export class ConsultationModel{
        object.idConsultation,
       new Date(object.dateConsultation),
       object.duree,
+      //null,
       DoctorModel.createDoctor(object.docteur),
-      object.poids,
+      object.poid,
       object.temperature,
        null,
       );
