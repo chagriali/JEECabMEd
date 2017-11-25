@@ -17,6 +17,7 @@ import {ConsultationEditComponent} from "./consultation-edit/consultation-edit.c
 import {SymptomeService} from "../../services/symptome.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MedicamentService} from "../../services/medicament.service";
+import {ReportingService} from "../../services/reporting.service";
 
 @NgModule({
   imports: [
@@ -31,6 +32,6 @@ import {MedicamentService} from "../../services/medicament.service";
 
   ],
   declarations: [ DashboardDoctorComponent ,DoctorPatientsListComponent , DoctorDetailPatientComponent , ConsultationsListComponent,ConsultationEditComponent],
-  providers:[SexService,PatientService,DossierService,ConsultationsService,SymptomeService,MedicamentService]
+  providers:[SexService,PatientService,DossierService,ConsultationsService,SymptomeService,MedicamentService,ReportingService]
 })
 export class DashboardDoctorModule { }

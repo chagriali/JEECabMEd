@@ -11,6 +11,7 @@ import {PatientService} from "../../services/patient.service";
 import {DossierService} from "../../services/dossier.service";
 import {DetailPatientComponent} from "./detail-patient/detail-patient.component";
 import {PatientsListComponent} from "./patients-list/patients-list.component";
+import {ReportingService} from "../../services/reporting.service";
 
 @NgModule({
   imports: [

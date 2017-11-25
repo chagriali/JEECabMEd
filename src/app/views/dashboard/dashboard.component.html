@@ -1,3 +1,15 @@
-<div class="animated fadeIn">
-  Hello Ali!
+<div class="row" style="height: 40%" >
+  <div class="col-md-8" style="background-color: white">
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
 </div>
+<div class="row"></div>
