@@ -7,7 +7,7 @@ export class ReportingService {
   }
 
   getDataReportingDepensesAndRecette(id: Number) {
-    return this.http.get('http://localhost:8080/report/' + id).map(res => res.json());
+    return this.http.get('http://localhost:9999/report/' + id).map(res => res.json());
   }
 
 }

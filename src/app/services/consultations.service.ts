@@ -10,14 +10,20 @@ export class ConsultationsService {
   }
 
   getConsultations(id: Number) {
-    return this.http.get('http://localhost:8080/consultation/' + id).map(res => res.json());
+    return this.http.get('http://localhost:9999/consultation/' + id).map(res => res.json());
 
   }
 
   addConsultation(idDossier: Number, consulation) {
 
     let header = new Headers({'Access-Control-Allow-Origin': '*',});
-    return this.http.post('http://localhost:8080/dossiermedical/' + idDossier + '/consultation/', consulation, {headers: header}).map(res => res.json())
+    return this.http.post('http://localhost:9999/dossiermedical/' + idDossier + '/consultation/', consulation, {headers: header}).map(res => res.json())
+  }
+
+  editConsultation(id,consulation){
+    let header = new Headers({'Access-Control-Allow-Origin': '*',});
+    return this.http.put('http://localhost:9999/dossiermedical/'+id+'/consultation', consulation, {headers: header}).map(res => res.json())
+
   }
 
 }

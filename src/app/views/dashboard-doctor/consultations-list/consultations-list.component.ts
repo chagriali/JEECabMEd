@@ -16,11 +16,11 @@ export class ConsultationsListComponent implements OnInit{
   ngOnInit(): void {
     this.consultationsService.getConsultations(1).subscribe(
       (result)=>{
-        let consultations:ConsultationModel[] = [];
+        /*let consultations:ConsultationModel[] = [];
         let c : ConsultationModel;
         for (let cons of result){
           c = new ConsultationModel(cons.id_consultation,cons.date_consultation,cons.duree,
-            DoctorModel.createDoctor(cons.docteur),cons.poids,cons.temperature);
+           DoctorModel.createDoctor(cons.docteur),cons.poids,cons.temperature);
           let symptomes: SymptomeModel[]=[];
           for(let s of cons.symptomes){
             symptomes.push(SymptomeModel.createSymptome(s));
@@ -29,7 +29,7 @@ export class ConsultationsListComponent implements OnInit{
           consultations.push(c);
         }
         this.consultations = consultations;
-        console.log(this.consultations);
+        console.log(this.consultations);*/
       }
       ,
       (error)=>{

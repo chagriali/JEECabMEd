@@ -1,4 +1,10 @@
 <form [formGroup]="consultationForm" (ngSubmit)="onValidate()">
+  <div class="row">
+    <div  class="form-group col-md-3">
+      <label for="">Montant à payer</label>
+      <input type="text" class="form-control" formControlName="montant">
+    </div>
+  </div>
 <tabset>
 
   <!-- Etat -->
@@ -75,6 +81,7 @@
   <!-- Ordonance -->
 
   <tab>
+    <button class="btn btn-dark " style="margin-bottom: 5px" (click)="onDownload()">Imprimer Ordonnance</button>
     <ng-template tabHeading>
       Ordonance
     </ng-template>
@@ -91,8 +98,8 @@
           <div class="col-md-12" style="margin-top: 5px" *ngIf="showDataMedicament">
             <ul class="list-group">
               <li *ngFor="let s of medicamentsToShow" class="list-group-item">
-                {{ s.libele }}
-                <button class="btn btn-outline-primary pull-right" (click)="onAddMedicament(s.idMedicament,s.libele,s.description)" type="button"><i class="fa fa-plus"></i></button>
+                {{ s.libelle }}
+                <button class="btn btn-outline-primary pull-right" (click)="onAddMedicament(s.idMedicament,s.libelle,s.description)" type="button"><i class="fa fa-plus"></i></button>
               </li>
             </ul>
           </div>
@@ -134,7 +141,53 @@
       </div>
   </tab>
 
+
+  <!-- Maladie -->
+  <tab>
+    <ng-template tabHeading>Maladie</ng-template>
+    <div class="card">
+      <div class="card-header">
+        <h2>Patient Maladie</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group" class="col-md-8">
+            <input class="form-control" type="text" #maladieInput (keyup)="onChangeMaladie()" #maladieFilter name="maladieFilter"  placeholder="Type symptome here">
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-outline-primary"  (click)="onAddMaladie(maladieInput)"  type="button">Ajouter</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="margin-top: 5px" *ngIf="showDataMaladie">
+            <ul class="list-group">
+              <li *ngFor="let s of maladieToShow" class="list-group-item">
+                {{ s.libele }}
+                <button class="btn btn-outline-primary pull-right" (click)="onMaladieAdd(s.idMaladie)" type="button"><i class="fa fa-plus"></i></button>
+              </li>
+
+            </ul>
+          </div>
+          <hr>
+
+        </div>
+
+      </div>
+    </div>
+    <hr>
+    <div class="col-md-12" style="margin-top: 5px" >
+      <ul class="list-group">
+        <li *ngFor="let s of maladieConsultation" class="list-group-item">
+          {{ s.libele }}
+          <button class="btn btn-outline-danger pull-right" (click)="onDeleteMed(s.idMaladie)" type="button"><i class="fa fa-minus"></i></button>
+        </li>
+      </ul>
+    </div>
+  </tab>
+
 </tabset>
 </form>
 <button class="btn btn-success pull-right" style="margin-top: 5px" type="button" [disabled]="!consultationForm.valid" (click)="onValidate()">Valider</button>
+
+
 

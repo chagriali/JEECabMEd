@@ -40,7 +40,7 @@ const routes: Routes = [
       },
       {
 
-        path: 'patient-detail/:id/consultation/:id',
+        path: 'patient-detail/:id/consultation/:idConsultation',
         component: ConsultationEditComponent ,
         data: {
           title: 'Edit consultation'

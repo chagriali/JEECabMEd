@@ -1,11 +1,11 @@
 export class MedicamentModel{
   idMedicament:Number;
-  libele:String;
+  libelle:String;
   description:String;
 
   constructor(id: Number, libelle: String , description:String) {
     this.idMedicament = id;
-    this.libele = libelle;
+    this.libelle = libelle;
     this.description=description;
   }
   static createMedicament(object:any){

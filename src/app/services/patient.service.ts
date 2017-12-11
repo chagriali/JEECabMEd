@@ -8,6 +8,6 @@ export class PatientService{
   constructor(private http:Http) {}
   addPatient(patient:PatientModel){
     let headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.post('http://localhost:8080/dossiermedical',patient,{headers:headers});
+    return this.http.post('http://localhost:9999/dossiermedical',patient,{headers:headers});
   }
 }

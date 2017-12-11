@@ -67,6 +67,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import {Http, HttpModule} from "@angular/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {PdfmakeModule} from "ng-pdf-make";
 
 @NgModule({
   imports: [

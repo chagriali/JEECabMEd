@@ -18,6 +18,8 @@ import {SymptomeService} from "../../services/symptome.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MedicamentService} from "../../services/medicament.service";
 import {ReportingService} from "../../services/reporting.service";
+import {PdfTestComponent} from "./pdf-test/pdf-test.component";
+import {MaladieService} from "../../services/maladie.service";
 
 @NgModule({
   imports: [
@@ -28,10 +30,12 @@ import {ReportingService} from "../../services/reporting.service";
     BsDropdownModule,
     NgbModule,
     TabsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+
 
   ],
   declarations: [ DashboardDoctorComponent ,DoctorPatientsListComponent , DoctorDetailPatientComponent , ConsultationsListComponent,ConsultationEditComponent],
-  providers:[SexService,PatientService,DossierService,ConsultationsService,SymptomeService,MedicamentService,ReportingService]
+  providers:[SexService,PatientService,DossierService,ConsultationsService,SymptomeService,MedicamentService,MaladieService,ReportingService]
 })
 export class DashboardDoctorModule { }

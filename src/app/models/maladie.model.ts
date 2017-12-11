@@ -1,22 +1,22 @@
-export class SymptomeModel{
-  idSymptome:Number
+export class MaladieModel{
+  idMaladie:Number
   libele:String;
   description:String;
 
   constructor(id: Number, libele: String , description:String) {
-    this.idSymptome = id;
+    this.idMaladie = id;
     this.libele = libele;
     this.description=description;
   }
   static createSymptome(object:any){
     if(object == null) return null;
-    return new SymptomeModel(object.idSymptome,object.libele,object.description);
+    return new MaladieModel(object.idMaladie,object.libele,object.description);
   }
-  static createSymptomeArray(object:any){
+  static createMaladieArray(object:any){
     if(object == null) return null;
-    let symptome:SymptomeModel[] = [];
+    let symptome:MaladieModel[] = [];
     for(let s of object){
-      symptome.push(new SymptomeModel(s.idSymptome,s.libele,s.description))
+      symptome.push(new MaladieModel(s.idMaladie,s.libele,s.description))
     }
     return symptome;
   }

@@ -78,15 +78,15 @@
 <h2>Consultation</h2>
 <div *ngIf="dossier != undefined">
 <div *ngFor="let c of dossier.consultations">
-  <div *ngIf="c.docteur!=null">
+  <div>
     <ngb-accordion   #acc="ngbAccordion" activeIds="ngb-panel-0">
-      <ngb-panel title="Date Consultation : {{c.date_consultation | date:'yyyy-MM-dd' }} - Docteur : {{ c.docteur.nom }} {{ c.docteur.prenom }}">
+      <ngb-panel title="Id : {{ c.idConsultation }} |Date Consultation : {{c.dateConsultation | date:'yyyy-MM-dd' }} -">
         <ng-template ngbPanelContent>
           <tabset>
             <tab><ng-template tabHeading>Etat</ng-template>
-              <p>poid : {{ c.poids }}</p>
+              <p>poid : {{ c.poid }}</p>
               <p>temperature : {{ c.temperature }}</p>
-              <p>Duree : {{ c.duree }} </p>
+
             </tab>
             <tab>
               <ng-template tabHeading>Symptomes</ng-template>
