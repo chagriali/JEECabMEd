@@ -52,17 +52,18 @@ export class ConsultationEditComponent{
     this.getSymptome();
     this.getMedicament();
     this.getMaladie();
-    this.initForm();
     this.initConsultation();
+    this.initForm();
+
   }
 
   initForm(){
     let prescriptionForm = new FormArray([]);
     this.consultationForm = new FormGroup({
-      'poid' : new FormControl(null,Validators.required),
-      'temperature' : new FormControl(null,Validators.required),
+      'poid' : new FormControl(this.consultation.poid,Validators.required),
+      'temperature' : new FormControl(this.consultation.temperature,Validators.required),
       'prescription' : prescriptionForm,
-      'montant': new FormControl(null,Validators.required),
+      'montant': new FormControl(this.consultation.montant_payee,Validators.required),
     })
   }
 
@@ -113,6 +114,24 @@ export class ConsultationEditComponent{
         console.log(result);
         this.consultation = ConsultationModel.createConsultation(result);
         console.log(this.consultation);
+        this.consultationForm.setValue({'poid' : this.consultation.poid,'temperature': this.consultation.temperature,'prescription': [] ,'montant':this.consultation.montant_payee});
+        if(this.consultation.ordonnance != null){
+
+          for ( let p of this.consultation.ordonnance.prescriptions )
+          {
+            (<FormArray>this.consultationForm.get('prescription')).push(new FormGroup({
+              'medicament' : new FormGroup({
+                'idMedicament': new FormControl(p.medicament.idMedicament),
+                'libelle' : new FormControl(p.medicament.libelle),
+                'description' : new FormControl(p.medicament.description)
+              }),
+              'quand' : new FormControl(p.quand,Validators.required),
+              'quantite' : new FormControl(p.quantite,Validators.required),
+              'nbrFois' : new FormControl(p.nbreFois,Validators.required),
+              'periode' : new FormControl(p.periode,Validators.required),
+            }));
+          }
+        }
       },
       (error) => {
         console.log(error);
@@ -130,7 +149,7 @@ export class ConsultationEditComponent{
     this.consultation.ordonnance = new OrdonanceModel();
 
     //console.log(this.consultationForm.value);
-    delete this.consultation['dateConsultation'];
+    //delete this.consultation['dateConsultation'];
     delete this.consultation.ordonnance['idOrdonnance'];
     delete this.consultation.ordonnance['dateOrdonnace'];
     this.consultation.ordonnance.prescriptions =   PrescriptionModel.createArrayPrescrption(this.consultationForm.value.prescription);
@@ -138,6 +157,16 @@ export class ConsultationEditComponent{
     //console.log(this.consultation);
     this.consultation.symptomes = this.symptomesConsultation;
     this.consultation.maladies = this.maladieConsultation;
+    switch (this.consultation.etat)
+    {
+      case 0 :
+        this.consultation.etat = 1;
+        break;
+      case 1 :
+        this.consultation.etat = 2;
+        break;
+    }
+
     console.log(this.consultation);
     let idDossier = this.activatedRoute.snapshot.params['id'];
     this.consultationService.editConsultation(idDossier,this.consultation).subscribe(
@@ -169,25 +198,25 @@ export class ConsultationEditComponent{
     let s: SymptomeModel = this.symptomes.find(x => x.idSymptome === id);
 
     if(s !== undefined)
-      this.symptomesConsultation.push(s);
+      this.consultation.symptomes.push(s);
   }
   onMaladieAdd(id: Number){
     let s: MaladieModel = this.maladie.find(x => x.idMaladie === id);
 
     if(s !== undefined)
-      this.maladieConsultation.push(s);
+      this.consultation.maladies.push(s);
   }
 
   onDelete(id:Number){
-      let i = this.symptomesConsultation.indexOf(this.symptomesConsultation.find(x => x.idSymptome === id));
+      let i = this.consultation.symptomes.indexOf(this.consultation.symptomes.find(x => x.idSymptome === id));
       console.log(i);
-      this.symptomesConsultation.splice(i,1);
+      this.consultation.symptomes.splice(i,1);
 
   }
 
   onDeleteMed(id:Number){
-      let i = this.maladieConsultation.indexOf(this.maladieConsultation.find(x => x.idMaladie === id));
-      this.maladieConsultation.splice(i,1);
+      let i = this.consultation.maladies.indexOf(this.consultation.maladies.find(x => x.idMaladie === id));
+      this.consultation.maladies.splice(i,1);
 
   }
 
@@ -209,7 +238,7 @@ export class ConsultationEditComponent{
         (result) =>{
           let s = new SymptomeModel(result.idSymptome,result.libele,result.description);
           this.symptomes.push(s);
-          this.symptomesConsultation.push(s);
+          this.consultation.symptomes.push(s);
         },
         (error) => {
           console.log(error)

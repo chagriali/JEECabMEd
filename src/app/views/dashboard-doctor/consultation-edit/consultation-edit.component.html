@@ -2,7 +2,7 @@
   <div class="row">
     <div  class="form-group col-md-3">
       <label for="">Montant à payer</label>
-      <input type="text" class="form-control" formControlName="montant">
+      <input type="text" class="form-control" formControlName="montant" [value]="consultation.montant_payee">
     </div>
   </div>
 <tabset>
@@ -70,7 +70,7 @@
       <hr>
       <div class="col-md-12" style="margin-top: 5px" >
         <ul class="list-group">
-          <li *ngFor="let s of symptomesConsultation" class="list-group-item">
+          <li *ngFor="let s of consultation.symptomes" class="list-group-item">
             {{ s.libele }}
             <button class="btn btn-outline-danger pull-right" (click)="onDelete(s.idSymptome)" type="button"><i class="fa fa-minus"></i></button>
           </li>
@@ -177,7 +177,7 @@
     <hr>
     <div class="col-md-12" style="margin-top: 5px" >
       <ul class="list-group">
-        <li *ngFor="let s of maladieConsultation" class="list-group-item">
+        <li *ngFor="let s of consultation.maladies" class="list-group-item">
           {{ s.libele }}
           <button class="btn btn-outline-danger pull-right" (click)="onDeleteMed(s.idMaladie)" type="button"><i class="fa fa-minus"></i></button>
         </li>
@@ -187,7 +187,9 @@
 
 </tabset>
 </form>
-<button class="btn btn-success pull-right" style="margin-top: 5px" type="button" [disabled]="!consultationForm.valid" (click)="onValidate()">Valider</button>
+<button *ngIf="consultation.etat === 0" class="btn btn-success pull-right" style="margin-top: 5px" type="button" [disabled]="!consultationForm.valid" (click)="onValidate()">Valider</button>
+<button *ngIf="consultation.etat === 1" class="btn btn-primary pull-right" style="margin-top: 5px" type="button" [disabled]="!consultationForm.valid" (click)="onValidate()">Update</button>
+<button *ngIf="consultation.etat === 2" class="btn btn-danger pull-right" style="margin-top: 5px" type="button" [disabled]="!consultationForm.valid" (click)="onValidate()">Finish</button>
 
 
 

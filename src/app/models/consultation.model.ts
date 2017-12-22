@@ -16,9 +16,10 @@ export class ConsultationModel{
   maladies:MaladieModel[];
   ordonnance:OrdonanceModel;
   montant_payee:Number;
+  etat:Number;
 
 
-  constructor(id?: Number, date?: Date  , Doc?:DoctorModel ,poids?:Number,temperature?:Number , symp?:SymptomeModel[],ordonance?:OrdonanceModel,maladies?:MaladieModel[],montant?:Number ) {
+  constructor(id?: Number, date?: Date  , Doc?:DoctorModel ,poids?:Number,temperature?:Number , symp?:SymptomeModel[],ordonance?:OrdonanceModel,maladies?:MaladieModel[],montant?:Number,etat?:Number ) {
     this.idConsultation = id;
     this.dateConsultation = date;
 
@@ -29,6 +30,7 @@ export class ConsultationModel{
     this.ordonnance = ordonance;
     this.maladies = maladies;
     this.montant_payee = montant;
+    this.etat = etat;
   }
 
   static createConsultation(object:any){
@@ -41,7 +43,8 @@ export class ConsultationModel{
       SymptomeModel.createSymptomeArray(object.symptomes),
       OrdonanceModel.createOrdonance(object.ordonnance),
       MaladieModel.createMaladieArray(object.maladies),
-      object.montant
+      object.montant_payee,
+      object.etat
       );
   }
 }
