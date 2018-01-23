@@ -1,11 +1,12 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http,Headers} from "@angular/http";
 
 @Injectable()
 export class MedicamentService {
   constructor(private http:Http){}
 
-  getMedicaments(){
-    return this.http.get('http://localhost:9999/medicament').map(res => res.json());
+  getMedicaments(token?){
+    let header = new Headers({'Access-Control-Allow-Origin': '*','Authorization':token});
+    return this.http.get('http://localhost:9999/medicament',{headers:header}).map(res => res.json());
   }
 }

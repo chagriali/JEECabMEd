@@ -1,0 +1,179 @@
+<ng-template #itemTemplate let-item="item" let-index="index"><li (click)="onMousedown()"   class="list-group-item">{{index}}: {{item.value}}</li></ng-template>
+
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <strong>Docteur</strong>
+    </div>
+    <div class="card-body">
+      <select  #doctorSelect  (change)="onChangedoctor(doctorSelect.value)"  class="form-control " style="display: inline"  id="select" name="select">
+        <option *ngFor="let d of docteurs" [value]="d.idPersonne">{{ d.prenom }} {{ d.nom }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>En Consultation</strong>
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousactif()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-default">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+                <button type="button" dropdownToggle class="btn btn-success dropdown-toggle dropdown-toggle-split">
+                  <span class="caret"></span>
+                  <span class="sr-only">Split button!</span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                  <li role="menuitem"><a (click)="onEndRendezVous(r.idRendezVous)" class="dropdown-item" >Valider paiement : 250 DH</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <strong>Rendez-vous pour Aujourd'hui</strong>
+      </div>
+      <div class="card-body">
+          <ul class="list-group">
+              <li class="list-group-item" *ngFor="let r of getRendezvousfortheday()" >
+                <div class="row">
+                <div class="btn-group col-md-12" dropdown>
+                  <button type="button" class="btn btn-default">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+                  <button type="button" dropdownToggle class="btn btn-primary dropdown-toggle dropdown-toggle-split">
+                    <span class="caret"></span>
+                    <span class="sr-only">Split button!</span>
+                  </button>
+                  <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem"><a (click)="onArrviePatient(r.idRendezVous)" class="dropdown-item" >Patient arrive</a></li>
+                    <li role="menuitem"><a (click)="onAbsentPatient(r.idRendezVous)" class="dropdown-item" >Patient absent</a></li>
+                  </ul>
+                </div>
+                </div>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <strong>Rendez-vous pour arrivé</strong>
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousarrive()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-primary">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+                <button type="button" dropdownToggle class="btn btn-primary dropdown-toggle dropdown-toggle-split">
+                  <span class="caret"></span>
+                  <span class="sr-only">Split button!</span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                  <li role="menuitem"><a (click)="onActifRendezVous(r.idRendezVous)" class="dropdown-item" >En consultation</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <strong>Rendez-vous  fini</strong>
+      </div>
+
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousfini()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-default">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+                <button type="button" dropdownToggle class="btn btn-primary dropdown-toggle dropdown-toggle-split">
+                  <span class="caret"></span>
+                  <span class="sr-only">Split button!</span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <hr>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousabsent()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-warning">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+                <button type="button" dropdownToggle class="btn btn-primary dropdown-toggle dropdown-toggle-split">
+                  <span class="caret"></span>
+                  <span class="sr-only">Split button!</span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                  <li role="menuitem"><a (click)="onActifRendezVous(r.idRendezVous)" class="dropdown-item" >En consultation</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-primary" (click)="onSend()">send</button>
+<!---
+<div class="row">
+  <div class="col-xs-6 col-6 col-md-5 col-lg-3">
+    <ul class="list-group">
+    <bs-sortable
+      [(ngModel)]="itemStringsLeft"
+      [itemTemplate]="itemTemplate"
+      fieldName="name"
+      itemClass="sortable-item"
+      itemActiveClass="sortable-item-active"
+      placeholderItem="Drag here"
+      placeholderClass="placeholderStyle"
+      wrapperClass="sortable-wrapper"
+      (ngModelChange)="onChangeItem($event)"
+    ></bs-sortable>
+    </ul>
+    <pre class="code-preview">model: {{ itemStringsLeft | json }}</pre>
+  </div>
+  <div class="col-xs-6 col-6 col-md-5 col-lg-3">
+    <ul class="list-group">
+    <bs-sortable
+      [(ngModel)]="itemStringsRight"
+      [itemTemplate]="itemTemplate"
+      fieldName="name"
+      itemClass="sortable-item"
+      itemActiveClass="sortable-item-active"
+      placeholderItem="Drag here"
+      placeholderClass="placeholderStyle"
+      wrapperClass="sortable-wrapper"
+    ></bs-sortable>
+    </ul>
+    <pre class="code-preview">model: {{ itemStringsRight | json }}</pre>
+  </div>
+</div>
+-->

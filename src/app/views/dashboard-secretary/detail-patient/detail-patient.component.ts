@@ -11,6 +11,7 @@ export class DetailPatientComponent implements OnInit{
 
   constructor(private dossierService:DossierService){}
   dossier : DossierModel;
+  moment:Date;
   ngOnInit(): void {
     this.dossierService.getDossierPatient(1).subscribe(
       (result)=>{

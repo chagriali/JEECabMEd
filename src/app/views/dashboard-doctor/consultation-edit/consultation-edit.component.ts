@@ -15,6 +15,7 @@ import {ConsultationsService} from "../../../services/consultations.service";
 import * as jsPDF from 'jspdf';
 import {MaladieModel} from "../../../models/maladie.model";
 import {MaladieService} from "../../../services/maladie.service";
+import {AuthDoctorService} from "../../../services/auth/auth-doctor.service";
 
 @Component({
   selector : 'app-consultation-edit',
@@ -46,7 +47,8 @@ export class ConsultationEditComponent{
               private consultationService:ConsultationsService,
               private medicamentService:MedicamentService,
               private maladieService:MaladieService,
-              private activatedRoute:ActivatedRoute){}
+              private activatedRoute:ActivatedRoute,
+              private authService:AuthDoctorService){}
   ngOnInit() {
     this.consultation = new ConsultationModel();
     this.getSymptome();
@@ -68,7 +70,7 @@ export class ConsultationEditComponent{
   }
 
   getSymptome(){
-    this.symptomeService.getSymptomes().subscribe(
+    this.symptomeService.getSymptomes(this.authService.token).subscribe(
       (result) =>{
 
         for(let s of result){
@@ -83,7 +85,7 @@ export class ConsultationEditComponent{
   }
 
   getMedicament(){
-    this.medicamentService.getMedicaments().subscribe(
+    this.medicamentService.getMedicaments(this.authService.token).subscribe(
       (result) =>{
         for(let m of result){
           this.medicaments.push(new MedicamentModel(m.idMedicament,m.libelle,m.description));
@@ -95,7 +97,7 @@ export class ConsultationEditComponent{
     )
   }
   getMaladie(){
-    this.maladieService.getMaladie().subscribe(
+    this.maladieService.getMaladie(this.authService.token).subscribe(
       (result) =>{
         for(let m of result){
           this.maladie.push(new MaladieModel(m.idMaladie,m.libele,m.description));
@@ -109,7 +111,7 @@ export class ConsultationEditComponent{
 
   initConsultation() {
     this.consultation.idConsultation = this.activatedRoute.snapshot.params['idConsultation'];
-    this.consultationService.getConsultations(this.consultation.idConsultation).subscribe(
+    this.consultationService.getConsultations(this.consultation.idConsultation,this.authService.token).subscribe(
       (result) => {
         console.log(result);
         this.consultation = ConsultationModel.createConsultation(result);
@@ -166,10 +168,10 @@ export class ConsultationEditComponent{
         this.consultation.etat = 2;
         break;
     }
-
+    this.consultation.docteur = this.authService.getDoctor();
     console.log(this.consultation);
     let idDossier = this.activatedRoute.snapshot.params['id'];
-    this.consultationService.editConsultation(idDossier,this.consultation).subscribe(
+    this.consultationService.editConsultation(idDossier,this.consultation,this.authService.token).subscribe(
       (result) => {
         console.log('result :');
         console.log(result);
@@ -233,7 +235,7 @@ export class ConsultationEditComponent{
         {
           description: "",
           libele: symptomeInput.value
-        }
+        },this.authService.token
       ).subscribe(
         (result) =>{
           let s = new SymptomeModel(result.idSymptome,result.libele,result.description);
@@ -251,7 +253,7 @@ export class ConsultationEditComponent{
         {
           description: "",
           libele: maladieInput.value
-        }
+        },this.authService.token
       ).subscribe(
         (result) =>{
           let s = new MaladieModel(result.idMaladie,result.libele,result.description);
@@ -309,7 +311,32 @@ export class ConsultationEditComponent{
 
   onDownload() {
     const doc = new jsPDF();
-    doc.text('Some text here ', 10,10);
+    doc.setFont("helvetica");
+    doc.setFontType("bold");
+    doc.text('Nom du patient :', 10,10);
+    doc.text('........................................', 50,10);
+
+
+    doc.text('Prescription:', 10,20);
+
+
+    doc.text('Nom Med', 10,30);
+    doc.text('Nombre fois', 50,30);
+    doc.text('Periode', 80,30);
+    doc.text('Qte', 110,30);
+    doc.text('Quand', 120,30);
+    doc.setFontType("normal");
+    let y = 40;
+    for(let p of this.consultationForm.value.prescription){
+      doc.text(p.medicament.libelle + '', 10,y);
+      doc.text(p.nbreFois + '', 50,y);
+      doc.text(p.periode + '', 80,y);
+      doc.text(p.quantite + '', 110,y);
+      doc.text(p.quand+ '', 140,y);
+      y += 10;
+    }
+
+
     doc.save('Test.pdf');
   }
 }

@@ -1,5 +1,11 @@
+<div class="row">
+  <div class="col-md-4">
+    <button (click)="MesDepenses()" class="btn btn-behance"><span><i class="fa fa-dollar"></i> Dépenses</span></button>
+  </div>
+</div>
+<hr>
 <div class="row" style="height: 40%" >
-  <div class="col-md-8" style="background-color: white">
+  <div class="col-md-7" style="background-color: white">
     <div style="display: block">
       <canvas baseChart
               [datasets]="barChartData"
@@ -11,5 +17,20 @@
               (chartClick)="chartClicked($event)"></canvas>
     </div>
   </div>
+  <div style="margin: 10px;">
+  </div>
+  <div class="col-md-4" style="background-color: white">
+    <h2 style="text-align: center ;  padding-top: 3%;">Suivie du Profit</h2>
+    <div style="display: block; padding-top: 10%;">
+
+      <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
 </div>
-<div class="row"></div>
+<div class="row">
+</div>

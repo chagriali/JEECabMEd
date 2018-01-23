@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>Docteur</strong>
+      </div>
+      <div class="card-body">
+        <select  #doctorSelect  (change)="onChangedoctor(doctorSelect.value)"  class="form-control " style="display: inline"  id="select" name="select">
+          <option *ngFor="let d of docteurs" [value]="d.idPersonne">{{ d.prenom }} {{ d.nom }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>En Consultation</strong>
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousactif()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-success">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <strong>Rendez-vous pour Aujourd'hui</strong>
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousfortheday()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-default">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <strong>Rendez-vous pour arrivé</strong>
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousarrive()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-primary">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <strong>Rendez-vous  fini</strong>
+      </div>
+
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousfini()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-default">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <hr>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of getRendezvousabsent()" >
+            <div class="row">
+              <div class="btn-group col-md-12" dropdown>
+                <button type="button" class="btn btn-warning">{{ r.patient.nom }} {{ r.patient.prenom}}</button>
+
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+

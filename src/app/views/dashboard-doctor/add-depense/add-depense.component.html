@@ -1,0 +1,43 @@
+
+<h1>Nouvelle Dépense</h1>
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="DepenseForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <div class="card">
+      <div class="card-header">
+        <strong>Formulaire :</strong> Ajouter Dépense
+      </div>
+      <div class="card-body">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="description"> Détail de la dépense</label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                id="description"
+                name="description"
+                class="form-control"
+                formControlName="description"
+              >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="montant"> Montant</label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                id="montant"
+                name="montant"
+                class="form-control"
+                formControlName="montant"
+              >
+            </div>
+          </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" [disabled]="!DepenseForm.valid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+        <button type="reset" class="btn btn-sm btn-danger" (click)="onReset()"><i class="fa fa-ban"></i> Reset</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>

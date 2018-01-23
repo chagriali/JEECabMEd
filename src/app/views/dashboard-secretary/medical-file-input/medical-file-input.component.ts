@@ -6,6 +6,7 @@ import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SexService} from "../../../services/sex.service";
 import {Ref_sexModel} from "../../../models/ref_sex.model";
 import {PatientService} from "../../../services/patient.service";
+import {AuthSecretatyService} from "../../../services/auth/auth-secretaty.service";
 
 @Component({
   selector:'app-medical-file-input',
@@ -15,10 +16,10 @@ export class MedicalFileInputComponent implements OnInit{
   medicalFileForm;
   sexForm:Ref_sexModel[] = [];
 
-  constructor(private sexService:SexService,private  patientService:PatientService){}
+  constructor(private sexService:SexService,private  patientService:PatientService,private authService:AuthSecretatyService){}
 
   ngOnInit(): void {
-    this.sexService.getGender().subscribe(
+    this.sexService.getGender(this.authService.token).subscribe(
       (result) => {
         console.log(result);
         for (let s of result){
@@ -53,7 +54,7 @@ export class MedicalFileInputComponent implements OnInit{
       refSex
     );
     console.log(patient);
-    this.patientService.addPatient(patient).subscribe((result)=>{
+    this.patientService.addPatient(patient,this.authService.token).subscribe((result)=>{
       console.log(result);
     },error => console.log(error) );
   }

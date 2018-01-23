@@ -90,7 +90,29 @@
             </tab>
             <tab>
               <ng-template tabHeading>Symptomes</ng-template>
-              Tab 2 content
+              <ul class="list-group" >
+                <li class="list-group-item " *ngFor="let s of c.symptomes">
+                  {{ s.libele }}
+                </li>
+              </ul>
+            </tab>
+
+            <tab>
+              <ng-template tabHeading>Prescription</ng-template>
+              <ul class="list-group" >
+                <li class="list-group-item " *ngFor="let p of c.ordonnance.prescriptions">
+                  {{ p.medicament. libelle }}   {{ p.periode }}   {{ p.quantite}}  {{ p.quand }}
+                </li>
+              </ul>
+            </tab>
+
+            <tab>
+              <ng-template tabHeading>Maladie</ng-template>
+              <ul class="list-group" >
+                <li class="list-group-item " *ngFor="let m of c.maladies">
+                 {{ m.libele}}
+                </li>
+              </ul>
             </tab>
           </tabset>
         </ng-template>

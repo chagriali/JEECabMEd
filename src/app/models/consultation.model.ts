@@ -19,7 +19,7 @@ export class ConsultationModel{
   etat:Number;
 
 
-  constructor(id?: Number, date?: Date  , Doc?:DoctorModel ,poids?:Number,temperature?:Number , symp?:SymptomeModel[],ordonance?:OrdonanceModel,maladies?:MaladieModel[],montant?:Number,etat?:Number ) {
+  constructor(id?: Number, date?: Date  , Doc?:DoctorModel ,poids?:Number,temperature?:Number , symp?:SymptomeModel[],ordonance?:OrdonanceModel,maladies?:MaladieModel[],montant?:Number,etat?:Number) {
     this.idConsultation = id;
     this.dateConsultation = date;
 

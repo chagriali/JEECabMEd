@@ -6,6 +6,10 @@ import {DoctorPatientsListComponent,} from "./patients-list/patients-list.compon
 import {DoctorDetailPatientComponent} from "./detail-patient/detail-patient.component";
 import {ConsultationsListComponent} from "./consultations-list/consultations-list.component";
 import {ConsultationEditComponent} from "./consultation-edit/consultation-edit.component";
+import {ConnectDoctorComponent} from "./auth-doctor/connect-doctor/connect-doctor.component";
+import {AuthGardDoctorService} from "../../services/auth/auth-gard-doctor.service";
+import {ConsultationDistComponent} from "../dashboard-patient/consultation-dist/consultation-dist.component";
+import {ConsDoctorComponent} from "./cons-doctor/cons-doctor.component";
 
 const routes: Routes = [
   {
@@ -20,7 +24,8 @@ const routes: Routes = [
         component: DoctorPatientsListComponent ,
         data: {
           title: 'Liste des patients'
-        }
+        },
+        canActivate:[AuthGardDoctorService]
       },
       {
 
@@ -28,7 +33,8 @@ const routes: Routes = [
         component: DoctorDetailPatientComponent ,
         data: {
           title: 'Détail du patient'
-        }
+        },
+        canActivate:[AuthGardDoctorService]
       },
       {
 
@@ -36,7 +42,8 @@ const routes: Routes = [
         component: ConsultationsListComponent ,
         data: {
           title: 'Liste des Consultations'
-        }
+        },
+        canActivate:[AuthGardDoctorService]
       },
       {
 
@@ -44,7 +51,24 @@ const routes: Routes = [
         component: ConsultationEditComponent ,
         data: {
           title: 'Edit consultation'
-        }
+        },
+        canActivate:[AuthGardDoctorService]
+      },
+      {
+
+        path: 'consult',
+        component: ConsDoctorComponent,
+        data: {
+          title: 'Mes consultations'
+        },
+        canActivate:[AuthGardDoctorService]
+      },{
+
+        path: 'auth',
+        component: ConnectDoctorComponent ,
+        data: {
+          title: 'authentication'
+        },
       },
     ]
   }

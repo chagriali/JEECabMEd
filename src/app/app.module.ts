@@ -68,17 +68,21 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import {Http, HttpModule} from "@angular/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {PdfmakeModule} from "ng-pdf-make";
+import {Ng2TableModule} from "ng2-table/ng2-table";
+import {PaginationModule} from "ngx-bootstrap";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
     HttpModule,
     NgbModule.forRoot(),
-
+    PaginationModule.forRoot()
 
   ],
   declarations: [

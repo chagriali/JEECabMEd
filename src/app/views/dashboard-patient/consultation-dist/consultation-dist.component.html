@@ -1,0 +1,27 @@
+<div>
+  <select  #doctorSelect (change)="onChangeDoctor(doctorSelect.value)" class="form-control " style="display: inline"  id="select" name="select">
+    <option *ngFor="let d of docteurs" [value]="d.idPersonne">{{ d.prenom }} {{ d.nom }}</option>
+  </select>
+</div>
+
+
+<div style="margin-top: 5px">
+  <div *ngFor="let c of consultation" class="form-group row">
+    <label class="col-md-3 form-control-label" >{{ c.dateConsultation | date:'yyyy-MM-dd HH:mm '}}</label>
+    <div class="col-md-9">
+      <textarea disabled class="form-control"  name="textarea-input" placeholder="Content.." rows="9" style="height: 77px;">
+        {{ c.message }}
+      </textarea>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="form-group row">
+
+  <div class="col-md-9">
+    <textarea  #message class="form-control"  name="textarea-input" placeholder="Content.." rows="9" style="height: 77px;"></textarea>
+  </div>
+  <button class="col-md-3 btn btn-primary" (click)="onSendMessage(message.value)">Send</button>
+</div>

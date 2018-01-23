@@ -6,12 +6,13 @@ export class SymptomeService{
 
   constructor(private http:Http) {}
 
-  getSymptomes(){
-    return this.http.get('http://localhost:9999/symptome').map(res => res.json());
+  getSymptomes(token?){
+    let header = new Headers({'Access-Control-Allow-Origin': '*','Authorization':token});
+    return this.http.get('http://localhost:9999/symptome',{headers:header}).map(res => res.json());
   }
 
-  addSymptome(symptome){
-    let header = new Headers({'Access-Control-Allow-Origin': '*'});
+  addSymptome(symptome,token?){
+    let header = new Headers({'Access-Control-Allow-Origin': '*','Authorization':token});
     return this.http.post('http://localhost:9999/symptome',symptome,{headers:header}).map(res => res.json());
   }
 }

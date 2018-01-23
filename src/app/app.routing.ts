@@ -33,6 +33,10 @@ export const routes: Routes = [
       {
         path: 'secretary',
         loadChildren: './views/dashboard-secretary/dashboard-secretary.module#DashboardSecretaryModule'
+      },
+      {
+        path: 'patient',
+        loadChildren: './views/dashboard-patient/dashboard-patient.module#DashboardPatientModule'
       }
     ]
   }

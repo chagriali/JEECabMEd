@@ -1,0 +1,151 @@
+
+
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Agenda
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-04">
+            <div class="btn-group">
+              <div
+                class="btn btn-primary"
+                mwlCalendarPreviousView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="activeDayIsOpen = false">
+                Previous
+              </div>
+              <div
+                class="btn btn-outline-secondary"
+                mwlCalendarToday
+                [(viewDate)]="viewDate">
+                Today
+              </div>
+              <div
+                class="btn btn-primary"
+                mwlCalendarNextView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="activeDayIsOpen = false">
+                Next
+              </div>
+            </div>
+          </div>
+            <div class="col-md-4">
+              <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <div>
+                  <select  #doctorSelect (change)="onChangeDoctor(doctorSelect.value)" class="form-control " style="display: inline"  id="select" name="select">
+                    <option *ngFor="let d of docteurs" [value]="d.idPersonne">{{ d.prenom }} {{ d.nom }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <mwl-calendar-month-view
+              [viewDate]="viewDate"
+              [events]="events"
+              [refresh]="refresh"
+            (dayClicked)="onDayClick($event)" >
+            </mwl-calendar-month-view>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<tabset>
+
+  <!-- Rendez vous en attente -->
+  <tab>
+    <ng-template tabHeading>
+      Rendez vous en attente
+    </ng-template>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Nom / prenom </th>
+        <th>Validation</th>
+        <th>Annulation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let r of getOnwaitRdv()">
+        <td>{{ r.patient.nom }}  {{ r.patient.prenom }}</td>
+        <td>
+          <button class="btn btn-success" [disabled]="isPast" (click)="onValidateRdv(r.idRendezVous)" > Valider</button>
+        </td>
+
+        <td>
+          <button class="btn btn-danger" [disabled]="isPast" (click)="onCancelRdv(r.idRendezVous)" > Annuler </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </tab>
+  <!-- Rendez vous en attente -->
+  <tab>
+    <ng-template tabHeading>
+      Rendez vous validé
+    </ng-template>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Nom / prenom </th>
+        <th>Annulation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let r of getValidRdv()">
+        <td>{{ r.patient.nom }}  {{ r.patient.prenom }}</td>
+
+        <td>
+          <button class="btn btn-danger" [disabled]="isPast" (click)="onCancelRdv(r.idRendezVous)" > Annuler </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </tab>
+  <!-- Rendez vous annulé -->
+  <tab>
+    <ng-template tabHeading>
+      Rendez vous annulés
+    </ng-template>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Nom / prenom </th>
+        <th>Valider</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let r of getCancelRdv()">
+        <td>{{ r.patient.nom }}  {{ r.patient.prenom }}</td>
+
+        <td>
+          <button class="btn btn-danger" [disabled]="isPast" (click)="onValidateRdv(r.idRendezVous)" > Annuler </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </tab>
+
+
+
+</tabset>

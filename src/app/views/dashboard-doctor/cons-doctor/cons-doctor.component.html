@@ -1,0 +1,38 @@
+<div class="row">
+
+  <div class="col-md-4">
+      <ul class="list-group" >
+        <li (click)="onConClick(p.idPersonne)" *ngFor="let p of patients" class="list-group-item">
+          {{ p.nom}} {{ p.prenom}}
+        </li>
+      </ul>
+  </div>
+
+
+  <div class="col-md-8">
+
+    <div *ngIf="consSelected != null" style="margin-top: 5px">
+      <div *ngFor="let c of consSelected" class="form-group row">
+        <label class="col-md-3 form-control-label" >{{ c.dateConsultation | date:'yyyy-MM-dd HH:mm '}}</label>
+        <div class="col-md-9">
+      <textarea disabled class="form-control"  name="textarea-input" placeholder="Content.." rows="9" style="height: 77px;">
+        {{ c.message }}
+      </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<hr>
+
+<div class="form-group row">
+
+  <div class="col-md-9">
+    <textarea  #message class="form-control"  name="textarea-input" placeholder="Content.." rows="9" style="height: 77px;"></textarea>
+  </div>
+  <button class="col-md-3 btn btn-primary" (click)="onSendMessage(message.value)">Send</button>
+</div>

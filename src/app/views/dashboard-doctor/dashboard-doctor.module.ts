@@ -20,6 +20,13 @@ import {MedicamentService} from "../../services/medicament.service";
 import {ReportingService} from "../../services/reporting.service";
 import {PdfTestComponent} from "./pdf-test/pdf-test.component";
 import {MaladieService} from "../../services/maladie.service";
+import {Ng2TableModule} from "ng2-table";
+import {ConnectDoctorComponent} from "./auth-doctor/connect-doctor/connect-doctor.component";
+import {AuthDoctorService} from "../../services/auth/auth-doctor.service";
+import {AuthGardDoctorService} from "../../services/auth/auth-gard-doctor.service";
+import {ConsultationDistService} from "../../services/consultation-dist.service";
+import {ConsultationDistComponent} from "../dashboard-patient/consultation-dist/consultation-dist.component";
+import {ConsDoctorComponent} from "./cons-doctor/cons-doctor.component";
 
 @NgModule({
   imports: [
@@ -31,11 +38,11 @@ import {MaladieService} from "../../services/maladie.service";
     NgbModule,
     TabsModule,
     ReactiveFormsModule,
-
+    Ng2TableModule,
 
 
   ],
-  declarations: [ DashboardDoctorComponent ,DoctorPatientsListComponent , DoctorDetailPatientComponent , ConsultationsListComponent,ConsultationEditComponent],
-  providers:[SexService,PatientService,DossierService,ConsultationsService,SymptomeService,MedicamentService,MaladieService,ReportingService]
+  declarations: [ DashboardDoctorComponent ,DoctorPatientsListComponent , DoctorDetailPatientComponent , ConsultationsListComponent,ConsultationEditComponent,PdfTestComponent,ConnectDoctorComponent,ConsDoctorComponent],
+  providers:[SexService,PatientService,DossierService,ConsultationsService,SymptomeService,MedicamentService,MaladieService,ReportingService,AuthDoctorService,AuthGardDoctorService,ConsultationDistService]
 })
 export class DashboardDoctorModule { }

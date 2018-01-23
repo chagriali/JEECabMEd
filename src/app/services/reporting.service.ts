@@ -6,8 +6,9 @@ export class ReportingService {
   constructor(private http: Http) {
   }
 
-  getDataReportingDepensesAndRecette(id: Number) {
-    return this.http.get('http://localhost:9999/report/' + id).map(res => res.json());
+  getDataReportingDepensesAndRecette(id: Number,token?) {
+    let header = new Headers({'Access-Control-Allow-Origin': '*','Authorization':token});
+    return this.http.get('http://localhost:9999/report/' + id,{headers:header}).map(res => res.json());
   }
 
 }
